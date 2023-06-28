@@ -6,7 +6,7 @@ import (
 	"github.com/TechBowl-japan/go-stations/model"
 )
 
-// A HealthzHandler implements health check endpoint.
+// A HealthzHandler implements he	alth check endpoint.
 type HealthzHandler struct{}
 
 // NewHealthzHandler returns HealthzHandler based http.Handler.
@@ -16,5 +16,5 @@ func NewHealthzHandler() *HealthzHandler {
 
 // ServeHTTP implements http.Handler interface.
 func (h *HealthzHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	_ = &model.HealthzResponse{Message: "ok"}
+	_ = &model.HealthzResponse{Message: "OK"}
 }
