@@ -2,7 +2,9 @@ package handler
 
 import (
 	"context"
+	"net/http"
 
+	"github.com/TechBowl-japan/go-stations/handler"
 	"github.com/TechBowl-japan/go-stations/model"
 	"github.com/TechBowl-japan/go-stations/service"
 )
@@ -22,6 +24,8 @@ func NewTODOHandler(svc *service.TODOService) *TODOHandler {
 // Create handles the endpoint that creates the TODO.
 func (h *TODOHandler) Create(ctx context.Context, req *model.CreateTODORequest) (*model.CreateTODOResponse, error) {
 	_, _ = h.svc.CreateTODO(ctx, "", "")
+	mux := http.NewServeMux()
+	mux.Handle("/healthz", handler.NewHealthzHandler())
 	return &model.CreateTODOResponse{}, nil
 }
 
