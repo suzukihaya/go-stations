@@ -41,11 +41,13 @@ func (s *TODOService) CreateTODO(ctx context.Context, subject, description strin
 	// データベースから保存されたTODOを取得します
 	row := s.db.QueryRowContext(ctx, confirm, id)
 	todo := &model.TODO{}
-	err = row.Scan(&todo.Subject, &todo.Description, &todo.CreatedAt, &todo.UpdatedAt)
+	err = row.Scan(&todo.ID, &todo.Subject, &todo.Description, &todo.CreatedAt, &todo.UpdatedAt)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	}
-
 	return todo, nil
 }
 
